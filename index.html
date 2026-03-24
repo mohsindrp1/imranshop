@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aaisha Digital Center — Imran Khan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================
+       CSS VARIABLES & RESET
+    ============================================ */
+    :root {
+      --blue:       #0a56e8;
+      --blue-dark:  #073bb5;
+      --cyan:       #00c9f5;
+      --orange:     #ff6b1a;
+      --orange2:    #ff9500;
+      --bg:         #f0f4ff;
+      --white:      #ffffff;
+      --dark:       #0d1b3e;
+      --dark2:      #1a2a55;
+      --text:       #2d3b6b;
+      --muted:      #6b7db3;
+      --radius:     16px;
+      --radius-sm:  10px;
+      --shadow:     0 8px 32px rgba(10,86,232,.13);
+      --shadow-lg:  0 16px 48px rgba(10,86,232,.22);
+      --font-head:  'Baloo 2', cursive;
+      --font-body:  'Poppins', sans-serif;
+      --grad-main:  linear-gradient(135deg, #0a56e8 0%, #00c9f5 100%);
+      --grad-fire:  linear-gradient(135deg, #ff6b1a 0%, #ff9500 100%);
+      --grad-dark:  linear-gradient(135deg, #0d1b3e 0%, #1a2a55 100%);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 15px; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .section-tag {
+      display: inline-block;
+      background: rgba(10,86,232,.1);
+      color: var(--blue);
+      font-family: var(--font-head);
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 16px; border-radius: 99px; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 2rem; font-weight: 800;
+      color: var(--dark); line-height: 1.25; margin-bottom: 10px;
+    }
+    .section-sub { color: var(--muted); font-size: .9rem; line-height: 1.7; max-width: 500px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 30px; border-radius: 99px;
+      font-family: var(--font-body); font-size: .88rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all .28s ease; letter-spacing: .02em;
+    }
+    .btn-primary { background: var(--grad-main); color: #fff; box-shadow: 0 6px 22px rgba(10,86,232,.38); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,86,232,.5); }
+    .btn-white { background: #fff; color: var(--blue); box-shadow: 0 6px 22px rgba(0,0,0,.14); }
+    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.2); }
+
+    /* ============================================
+       NAVBAR
+    ============================================ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(10,86,232,.1);
+      transition: box-shadow .3s;
+    }
+    .navbar.scrolled { box-shadow: 0 4px 24px rgba(10,86,232,.15); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: var(--dark);
+    }
+    .logo-badge {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--grad-main);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-weight: 800; font-size: 1rem; color: #fff;
+      box-shadow: 0 4px 14px rgba(10,86,232,.4); flex-shrink: 0;
+    }
+    .logo-text span { color: var(--blue); }
+    .nav-menu { display: flex; align-items: center; gap: 4px; }
+    .nav-menu a {
+      padding: 7px 15px; border-radius: 99px;
+      font-size: .83rem; font-weight: 500; color: var(--text); transition: all .22s;
+    }
+    .nav-menu a:hover, .nav-menu a.active { background: rgba(10,86,232,.09); color: var(--blue); }
+    .nav-book {
+      background: var(--grad-main) !important; color: #fff !important;
+      box-shadow: 0 4px 14px rgba(10,86,232,.35);
+    }
+    .nav-book:hover { transform: translateY(-2px); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2.5px;
+      background: var(--dark); border-radius: 2px; transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+    .mobile-nav {
+      display: none; position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(10,86,232,.1);
+      padding: 16px 20px 20px;
+      flex-direction: column; gap: 4px;
+      z-index: 999; box-shadow: 0 12px 32px rgba(0,0,0,.12);
+      animation: slideDown .25s ease;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 11px 18px; border-radius: var(--radius-sm);
+      font-weight: 500; color: var(--text); font-size: .92rem; transition: all .2s;
+    }
+    .mobile-nav a:hover { background: rgba(10,86,232,.08); color: var(--blue); }
+    .mobile-nav .nav-book { background: var(--grad-main); color: #fff; text-align: center; margin-top: 6px; }
+    @keyframes slideDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero {
+      min-height: 100vh;
+      background: var(--grad-dark);
+      position: relative; display: flex; align-items: center;
+      overflow: hidden; padding-top: 68px;
+    }
+    .hero-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(60px); opacity: .35; pointer-events: none;
+    }
+    .hero-blob-1 {
+      width: 520px; height: 520px; background: var(--blue);
+      top: -120px; right: -80px;
+      animation: blobFloat 7s ease-in-out infinite alternate;
+    }
+    .hero-blob-2 {
+      width: 380px; height: 380px; background: var(--cyan);
+      bottom: -60px; left: -80px;
+      animation: blobFloat 9s ease-in-out infinite alternate-reverse;
+    }
+    .hero-blob-3 {
+      width: 260px; height: 260px; background: var(--orange);
+      bottom: 100px; right: 200px; opacity: .2;
+      animation: blobFloat 6s ease-in-out infinite alternate;
+    }
+    @keyframes blobFloat { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.08)} }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,201,245,.06) 1px,transparent 1px), linear-gradient(90deg,rgba(0,201,245,.06) 1px,transparent 1px);
+      background-size: 40px 40px; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 80px 0 100px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: var(--cyan); font-size: .78rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 99px; margin-bottom: 22px;
+      animation: fadeUp .6s .1s both;
+    }
+    .hero-tag::before { content: ''; display:inline-block; width:8px; height:8px; background:var(--cyan); border-radius:50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero-title {
+      font-family: var(--font-head); font-size: clamp(2.4rem,6vw,4.2rem);
+      font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 18px;
+      animation: fadeUp .6s .2s both;
+    }
+    .hero-title .grad-text {
+      background: linear-gradient(90deg, var(--cyan), var(--orange2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem,2.5vw,1.25rem); color: rgba(255,255,255,.72);
+      margin-bottom: 36px; font-family: var(--font-head);
+      animation: fadeUp .6s .3s both;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp .6s .4s both; }
+    .hero-stats {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+      margin-top: 56px; animation: fadeUp .7s .55s both;
+    }
+    .stat-card {
+      background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 14px; padding: 16px 28px; text-align: center;
+      backdrop-filter: blur(8px); transition: transform .25s;
+    }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-num {
+      font-family: var(--font-head); font-size: 1.7rem; font-weight: 800;
+      background: linear-gradient(90deg,var(--cyan),#fff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-lbl { font-size: .72rem; color: rgba(255,255,255,.6); margin-top: 2px; letter-spacing: .05em; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .scroll-indicator {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,.5); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      animation: fadeUp .6s .7s both;
+    }
+    .scroll-dot { width: 22px; height: 36px; border: 2px solid rgba(255,255,255,.3); border-radius: 11px; position: relative; }
+    .scroll-dot::after {
+      content: ''; width: 4px; height: 8px; background: var(--cyan);
+      border-radius: 2px; position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+      animation: scrollBounce 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0);opacity:1} 80%{transform:translateX(-50%) translateY(14px);opacity:0} }
+
+    /* ============================================
+       SERVICES
+    ============================================ */
+    .services { padding: 100px 0; background: var(--bg); }
+    .services-header { text-align: center; margin-bottom: 56px; }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; }
+    .service-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 28px 20px 24px; text-align: center;
+      box-shadow: 0 4px 20px rgba(10,86,232,.07);
+      border: 1.5px solid rgba(10,86,232,.07);
+      transition: all .3s ease; cursor: default; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad-main); opacity: 0; transition: opacity .3s; z-index: 0;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover .svc-icon-wrap { background: rgba(255,255,255,.2); }
+    .service-card:hover .svc-name { color: #fff; }
+    .service-card:hover .svc-desc { color: rgba(255,255,255,.8); }
+    .svc-icon-wrap {
+      width: 64px; height: 64px; border-radius: 18px;
+      background: rgba(10,86,232,.1);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; transition: background .3s; position: relative; z-index: 1;
+    }
+    .svc-icon { font-size: 1.9rem; line-height: 1; }
+    .svc-name { font-family: var(--font-head); font-size: .95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; position: relative; z-index: 1; transition: color .3s; }
+    .svc-desc { font-size: .72rem; color: var(--muted); line-height: 1.5; position: relative; z-index: 1; transition: color .3s; }
+
+    /* ============================================
+       ABOUT
+    ============================================ */
+    .about { padding: 100px 0; background: linear-gradient(180deg,#e8eeff 0%,#f0f4ff 100%); position: relative; overflow: hidden; }
+    .about::before {
+      content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle,rgba(10,86,232,.07),transparent 70%);
+      top: -200px; right: -200px; pointer-events: none;
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-visual { position: relative; }
+    .about-card-main {
+      background: var(--grad-dark); border-radius: 24px; padding: 36px; color: #fff;
+      position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .about-card-main::before {
+      content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(0,201,245,.15); top: -60px; right: -60px;
+    }
+    .owner-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--grad-main);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: #fff;
+      margin-bottom: 18px; box-shadow: 0 6px 20px rgba(10,86,232,.4);
+      position: relative; z-index: 1;
+    }
+    .owner-name { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; position: relative; z-index: 1; }
+    .owner-role { font-size: .78rem; color: var(--cyan); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; position: relative; z-index: 1; }
+    .owner-quote { font-size: .88rem; color: rgba(255,255,255,.75); line-height: 1.7; font-family: var(--font-head); position: relative; z-index: 1; }
+    .badge-float {
+      position: absolute; background: #fff; border-radius: 14px; padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.14);
+      font-size: .78rem; font-weight: 600; color: var(--dark);
+      animation: badgeFloat 4s ease-in-out infinite alternate;
+    }
+    .badge-float-1 { bottom: -18px; right: 24px; animation-delay: 0s; }
+    .badge-float-2 { top: -18px; left: 24px; animation-delay: 1.5s; }
+    .badge-float .badge-icon { font-size: 1.2rem; }
+    @keyframes badgeFloat { from{transform:translateY(0)} to{transform:translateY(-8px)} }
+    .about-content { position: relative; z-index: 1; }
+    .trust-items { display: flex; flex-direction: column; gap: 16px; margin-top: 30px; }
+    .trust-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: #fff; border-radius: var(--radius-sm); padding: 16px 18px;
+      box-shadow: 0 2px 14px rgba(10,86,232,.07); border-left: 4px solid var(--blue);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .trust-item:hover { transform: translateX(5px); box-shadow: var(--shadow); }
+    .trust-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .trust-text strong { display: block; font-size: .88rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+    .trust-text span { font-size: .76rem; color: var(--muted); }
+
+    /* ============================================
+       BOOKING FORM
+    ============================================ */
+    .booking { padding: 100px 0; background: var(--bg); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+    .info-list { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .info-item { display: flex; align-items: center; gap: 12px; font-size: .88rem; color: var(--text); }
+    .info-dot { width: 36px; height: 36px; border-radius: 50%; background: rgba(10,86,232,.1); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .form-card { background: #fff; border-radius: 24px; padding: 40px 36px; box-shadow: var(--shadow-lg); border: 1.5px solid rgba(10,86,232,.08); }
+    .form-title {
+      font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; color: var(--dark);
+      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+    .form-title::before { content: ''; display: block; width: 5px; height: 24px; background: var(--grad-main); border-radius: 3px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; text-transform: uppercase; letter-spacing: .05em; }
+    .form-control {
+      width: 100%; padding: 13px 16px; border-radius: var(--radius-sm);
+      border: 1.5px solid #d8e2f8; background: #f8faff;
+      color: var(--dark); font-family: var(--font-body); font-size: .9rem;
+      outline: none; transition: all .22s; -webkit-appearance: none; appearance: none;
+    }
+    .form-control:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 4px rgba(10,86,232,.1); }
+    .form-control.error { border-color: #f44336; box-shadow: 0 0 0 4px rgba(244,67,54,.1); }
+    .error-msg { color: #f44336; font-size: .73rem; margin-top: 5px; display: none; }
+    .error-msg.show { display: block; }
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--grad-main); border: none; border-radius: var(--radius-sm);
+      color: #fff; font-family: var(--font-head); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all .28s; box-shadow: 0 6px 22px rgba(10,86,232,.38);
+      display: flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: .02em;
+    }
+    .form-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,86,232,.5); }
+    .form-success { display: none; text-align: center; padding: 30px; }
+    .form-success.show { display: block; }
+    .success-icon { font-size: 3rem; margin-bottom: 14px; }
+    .success-text { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .success-sub { font-size: .82rem; color: var(--muted); }
+
+    /* ============================================
+       CONTACT
+    ============================================ */
+    .contact { padding: 100px 0; background: linear-gradient(180deg,#e8eeff 0%,#f0f4ff 100%); }
+    .contact-header { text-align: center; margin-bottom: 56px; }
+    .contact-header .section-sub { margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start; }
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; }
+    .contact-card {
+      background: #fff; border-radius: var(--radius); padding: 20px 22px;
+      display: flex; align-items: center; gap: 16px;
+      box-shadow: 0 4px 20px rgba(10,86,232,.07); border: 1.5px solid rgba(10,86,232,.06);
+      transition: all .25s; text-decoration: none; color: inherit;
+    }
+    .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(10,86,232,.2); }
+    .cc-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .cc-icon.blue   { background: rgba(10,86,232,.1); }
+    .cc-icon.green  { background: rgba(37,211,102,.1); }
+    .cc-icon.orange { background: rgba(255,107,26,.1); }
+    .cc-label { font-size: .7rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .cc-value { font-size: .92rem; font-weight: 700; color: var(--dark); }
+    .wa-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg,#25d366,#128c7e);
+      border: none; border-radius: var(--radius-sm); color: #fff;
+      font-family: var(--font-head); font-size: .95rem; font-weight: 700;
+      cursor: pointer; transition: all .28s; box-shadow: 0 6px 22px rgba(37,211,102,.38);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      text-decoration: none; margin-top: 6px;
+    }
+    .wa-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(37,211,102,.5); }
+    .map-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1.5px solid rgba(10,86,232,.1); }
+    .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    .footer { background: var(--grad-dark); padding: 56px 0 32px; color: rgba(255,255,255,.75); position: relative; overflow: hidden; }
+    .footer::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+      background-size: 40px 40px; pointer-events: none;
+    }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 48px; position: relative; }
+    .footer-brand .nav-logo { color: #fff; margin-bottom: 14px; }
+    .footer-brand p { font-size: .82rem; line-height: 1.75; color: rgba(255,255,255,.6); max-width: 280px; }
+    .footer-col h4 { font-family: var(--font-head); font-size: .85rem; font-weight: 700; color: var(--cyan); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul li a { font-size: .82rem; color: rgba(255,255,255,.6); transition: color .2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: relative;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.5); }
+    .footer-copy span { color: var(--cyan); }
+    .footer-heart { font-size: .78rem; color: rgba(255,255,255,.5); }
+    .footer-heart span { color: #ff6b6b; }
+
+    /* ============================================
+       SCROLL REVEAL
+    ============================================ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ============================================
+       BACK TO TOP
+    ============================================ */
+    .back-top {
+      position: fixed; bottom: 28px; right: 24px;
+      width: 46px; height: 46px; background: var(--grad-main);
+      border: none; border-radius: 50%; color: #fff; font-size: 1.1rem;
+      cursor: pointer; box-shadow: 0 6px 20px rgba(10,86,232,.45);
+      transition: all .28s; opacity: 0; pointer-events: none;
+      display: flex; align-items: center; justify-content: center; z-index: 500;
+    }
+    .back-top.show { opacity: 1; pointer-events: auto; }
+    .back-top:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(10,86,232,.55); }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .booking-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 60px 0 80px; }
+      .services-grid { grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 14px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .section-title { font-size: 1.6rem; }
+      .form-card { padding: 28px 22px; }
+      .about-card-main { padding: 26px; }
+      .badge-float { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .hero-stats { gap: 12px; }
+      .stat-card { padding: 12px 20px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <div class="logo-badge">ADC</div>
+        <div class="logo-text">Aaisha <span>Digital</span> Center</div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#booking" class="nav-book">Book Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home"     onclick="closeMobile()">Home</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#about"    onclick="closeMobile()">About</a>
+  <a href="#contact"  onclick="closeMobile()">Contact</a>
+  <a href="#booking"  onclick="closeMobile()" class="nav-book">Book Now</a>
+</div>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">Bihar Ka #1 Digital Center</div>
+      <h1 class="hero-title">Aaisha<br/><span class="grad-text">Digital Center</span></h1>
+      <p class="hero-sub">Sabhi Online Services Yahan Available Hai &#127470;&#127475;</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn btn-primary">&#128197; Book Now</a>
+        <a href="#services" class="btn btn-white">&#128269; Services Dekhen</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">500+</div>
+          <div class="stat-lbl">Happy Customers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">11+</div>
+          <div class="stat-lbl">Services Available</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5&#9733;</div>
+          <div class="stat-lbl">Customer Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title">Hamari Sabhi Seva</h2>
+      <p class="section-sub">Ek hi jagah par sabhi zaroori online kaam — tez, sahi, aur bharosemand.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#129426;</span></div>
+        <div class="svc-name">Aadhaar Services</div>
+        <div class="svc-desc">Update, correction &amp; download</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#129689;</span></div>
+        <div class="svc-name">PAN Card</div>
+        <div class="svc-desc">Apply, correction &amp; reprint</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128379;</span></div>
+        <div class="svc-name">Voter ID</div>
+        <div class="svc-desc">Registration &amp; correction</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128215;</span></div>
+        <div class="svc-name">Passport</div>
+        <div class="svc-desc">Apply &amp; status check</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128642;</span></div>
+        <div class="svc-name">Railway Ticket</div>
+        <div class="svc-desc">Booking &amp; cancellation</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#9992;&#65039;</span></div>
+        <div class="svc-name">Flight Ticket</div>
+        <div class="svc-desc">Domestic &amp; international</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128221;</span></div>
+        <div class="svc-name">Online Form Fill</div>
+        <div class="svc-desc">Sarkari form bharwa</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#9889;</span></div>
+        <div class="svc-name">Bijli Bill</div>
+        <div class="svc-desc">Electricity bill payment</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128241;</span></div>
+        <div class="svc-name">Mobile Recharge</div>
+        <div class="svc-desc">Sabhi networks available</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128176;</span></div>
+        <div class="svc-name">Money Transfer</div>
+        <div class="svc-desc">NEFT, IMPS, UPI</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon-wrap"><span class="svc-icon">&#128424;&#65039;</span></div>
+        <div class="svc-name">Print / Scan</div>
+        <div class="svc-desc">Color &amp; B/W printing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-main">
+          <div class="owner-avatar">IK</div>
+          <div class="owner-name">Imran Khan</div>
+          <div class="owner-role">Founder &amp; Owner &#8212; ADC</div>
+          <p class="owner-quote">
+            "Yeh ek trusted digital seva center hai jahan sabhi online kaam aasani se kiya jata hai. Hamara lakshya hai aapki har seva ko asaan aur tez banana."
+          </p>
+        </div>
+        <div class="badge-float badge-float-1">
+          <span class="badge-icon">&#9989;</span> Trusted Center
+        </div>
+        <div class="badge-float badge-float-2">
+          <span class="badge-icon">&#9889;</span> Fast Service
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">Hamare Bare Mein</h2>
+        <p class="section-sub">Aaisha Digital Center &#8212; Bihar ka ek bharosemand CSP aur cyber cafe center hai. Hum aapko sarkari kaam se lekar ticket booking tak &#8212; sab kuch ek hi jagah provide karte hain.</p>
+        <div class="trust-items">
+          <div class="trust-item">
+            <span class="trust-icon">&#127885;</span>
+            <div class="trust-text">
+              <strong>Certified CSP Center</strong>
+              <span>Government approved digital service point</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">&#128274;</span>
+            <div class="trust-text">
+              <strong>Surakshit Data</strong>
+              <span>Aapki jaankari poori tarah safe hai</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">&#9201;&#65039;</span>
+            <div class="trust-text">
+              <strong>Tez Seva &#8212; Same Day</strong>
+              <span>Zyaadatar kaam usi din poora hota hai</span>
+            </div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">&#128172;</span>
+            <div class="trust-text">
+              <strong>Hamesha Support</strong>
+              <span>Call ya WhatsApp par help milegi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BOOKING FORM ========== -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <div class="booking-info reveal">
+        <div class="section-tag">Book Now</div>
+        <h2 class="section-title">Apni Seva Book Karein</h2>
+        <p class="section-sub">Form bharen aur hamara team aapko jaldi contact karega.</p>
+        <div class="info-list">
+          <div class="info-item"><div class="info-dot">&#128222;</div> Call: 7260084847</div>
+          <div class="info-item"><div class="info-dot">&#128172;</div> WhatsApp: 7260084847</div>
+          <div class="info-item"><div class="info-dot">&#128336;</div> Mon&#8211;Sat: 9 AM &#8211; 8 PM</div>
+          <div class="info-item"><div class="info-dot">&#128205;</div> Patna, Bihar</div>
+        </div>
+      </div>
+      <div class="form-card reveal reveal-delay-2">
+        <div class="form-title">Booking Form</div>
+        <div id="bookingForm">
+          <div class="form-group">
+            <label class="form-label" for="fieldName">Aapka Naam</label>
+            <input type="text" id="fieldName" class="form-control" placeholder="Poora naam likhein" />
+            <div class="error-msg" id="errName">Naam zaroori hai</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fieldMobile">Mobile Number</label>
+            <input type="tel" id="fieldMobile" class="form-control" placeholder="10 digit number" maxlength="10" />
+            <div class="error-msg" id="errMobile">Sahi 10-digit number dalein</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fieldService">Service Chunein</label>
+            <select id="fieldService" class="form-control">
+              <option value="">-- Service Select Karein --</option>
+              <option>Aadhaar Services</option>
+              <option>PAN Card</option>
+              <option>Voter ID</option>
+              <option>Passport</option>
+              <option>Railway Ticket Booking</option>
+              <option>Flight Ticket Booking</option>
+              <option>Online Form Fill</option>
+              <option>Electricity Bill Payment</option>
+              <option>Mobile Recharge</option>
+              <option>Money Transfer</option>
+              <option>Print / Scan</option>
+            </select>
+            <div class="error-msg" id="errService">Service chunna zaroori hai</div>
+          </div>
+          <button class="form-submit" onclick="submitBooking()">&#128233; Submit Booking</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">&#127881;</div>
+          <div class="success-text">Booking Ho Gayi!</div>
+          <p class="success-sub">Aapka booking request bheja gaya.<br/>Imran Khan sir jald contact karenge.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-header reveal">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">Humse Sampark Karein</h2>
+      <p class="section-sub">Kisi bhi madad ke liye call ya WhatsApp karein &#8212; hum hamesha available hain.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-cards">
+        <a href="tel:7260084847" class="contact-card reveal">
+          <div class="cc-icon blue">&#128222;</div>
+          <div>
+            <div class="cc-label">Call Us</div>
+            <div class="cc-value">+91 72600 84847</div>
+          </div>
+        </a>
+        <a href="https://wa.me/917260084847?text=Namaste%2C%20mujhe%20aapki%20service%20chahiye" target="_blank" class="contact-card reveal reveal-delay-1">
+          <div class="cc-icon green">&#128172;</div>
+          <div>
+            <div class="cc-label">WhatsApp</div>
+            <div class="cc-value">+91 72600 84847</div>
+          </div>
+        </a>
+        <div class="contact-card reveal reveal-delay-2">
+          <div class="cc-icon orange">&#128205;</div>
+          <div>
+            <div class="cc-label">Address</div>
+            <div class="cc-value">Patna, Bihar &#8212; India</div>
+          </div>
+        </div>
+        <div class="contact-card reveal reveal-delay-3">
+          <div class="cc-icon blue">&#128336;</div>
+          <div>
+            <div class="cc-label">Timing</div>
+            <div class="cc-value">Mon&#8211;Sat: 9 AM &#8211; 8 PM</div>
+          </div>
+        </div>
+        <a href="https://wa.me/917260084847?text=Namaste%2C%20mujhe%20aapki%20service%20chahiye" target="_blank" class="wa-btn reveal">
+          &#128172; WhatsApp Par Message Karein
+        </a>
+      </div>
+      <div class="map-wrap reveal reveal-delay-2">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d460800.9820456524!2d84.85329805000001!3d25.594062800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed5844f0bb5879%3A0x11ffb2a0908ba0a8!2sPatna%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Aaisha Digital Center Location">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="logo-badge" style="background:linear-gradient(135deg,#00c9f5,#0a56e8);">ADC</div>
+          <div style="color:#fff;font-family:var(--font-head);font-weight:800;font-size:1rem;">Aaisha Digital Center</div>
+        </div>
+        <p>Bihar ka trusted digital seva kendra. Sabhi online kaam ek hi jagah par &#8212; tez, sahi, aur surakshit.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#booking">Book Now</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hamari Seva</h4>
+        <ul>
+          <li><a href="#services">Aadhaar Services</a></li>
+          <li><a href="#services">PAN Card</a></li>
+          <li><a href="#services">Railway Ticket</a></li>
+          <li><a href="#services">Money Transfer</a></li>
+          <li><a href="#services">Print / Scan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2024 <span>Aaisha Digital Center</span> &#8212; Owner: Imran Khan | &#128222; 7260084847</p>
+      <p class="footer-heart">Made with <span>&#9829;</span> in Bihar, India</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">&#8679;</button>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+"use strict";
+
+/* ---------- NAVBAR ---------- */
+const navbar    = document.getElementById("navbar");
+const hamburger = document.getElementById("hamburger");
+const mobileNav = document.getElementById("mobileNav");
+const backTop   = document.getElementById("backTop");
+const navLinks  = document.querySelectorAll(".nav-menu a");
+
+window.addEventListener("scroll", function() {
+  navbar.classList.toggle("scrolled", window.scrollY > 20);
+  backTop.classList.toggle("show", window.scrollY > 400);
+  updateActiveLink();
+});
+
+hamburger.addEventListener("click", function() {
+  hamburger.classList.toggle("open");
+  mobileNav.classList.toggle("open");
+});
+
+function closeMobile() {
+  hamburger.classList.remove("open");
+  mobileNav.classList.remove("open");
+}
+
+function updateActiveLink() {
+  var sections = ["home","services","about","booking","contact"];
+  var current = "home";
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  navLinks.forEach(function(a) {
+    a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+  });
+}
+
+/* ---------- SCROLL REVEAL ---------- */
+var revealEls = document.querySelectorAll(".reveal");
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+revealEls.forEach(function(el) { observer.observe(el); });
+
+/* ---------- BOOKING FORM ---------- */
+function submitBooking() {
+  var nameEl    = document.getElementById("fieldName");
+  var mobileEl  = document.getElementById("fieldMobile");
+  var serviceEl = document.getElementById("fieldService");
+
+  var name    = nameEl.value.trim();
+  var mobile  = mobileEl.value.trim();
+  var service = serviceEl.value;
+  var valid   = true;
+
+  // Reset errors
+  ["fieldName","fieldMobile","fieldService"].forEach(function(id) {
+    document.getElementById(id).classList.remove("error");
+  });
+  ["errName","errMobile","errService"].forEach(function(id) {
+    document.getElementById(id).classList.remove("show");
+  });
+
+  if (!name || name.length < 2) {
+    nameEl.classList.add("error");
+    document.getElementById("errName").classList.add("show");
+    valid = false;
+  }
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    mobileEl.classList.add("error");
+    document.getElementById("errMobile").classList.add("show");
+    valid = false;
+  }
+  if (!service) {
+    serviceEl.classList.add("error");
+    document.getElementById("errService").classList.add("show");
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  // Open SMS app with pre-filled message
+  var message = "New Booking: " + name + ", " + mobile + ", " + service;
+  window.location.href = "sms:7260084847?body=" + encodeURIComponent(message);
+
+  // Show success state
+  document.getElementById("bookingForm").style.display = "none";
+  document.getElementById("formSuccess").classList.add("show");
+
+  setTimeout(function() {
+    document.getElementById("bookingForm").style.display = "block";
+    document.getElementById("formSuccess").classList.remove("show");
+    nameEl.value = ""; mobileEl.value = ""; serviceEl.value = "";
+  }, 5000);
+}
+
+// Clear error on input
+["fieldName","fieldMobile","fieldService"].forEach(function(id) {
+  document.getElementById(id).addEventListener("input", function() {
+    this.classList.remove("error");
+  });
+  document.getElementById(id).addEventListener("keydown", function(e) {
+    if (e.key === "Enter") submitBooking();
+  });
+});
+
+/* ---------- SMOOTH SCROLL ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener("click", function(e) {
+    var target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+</script>
+</body>
+</html>
